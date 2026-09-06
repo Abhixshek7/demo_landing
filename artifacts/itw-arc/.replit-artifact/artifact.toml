@@ -12,10 +12,10 @@ paths = [ "/" ]
 localPort = 20568
 
 [services.development]
-run = "pnpm --filter @workspace/itw-arc run dev"
+run = "npm run dev --workspace=@workspace/itw-arc"
 
 [services.production]
-build = [ "pnpm", "--filter", "@workspace/itw-arc", "run", "build" ]
+build = [ "npm", "run", "build", "--workspace=@workspace/itw-arc" ]
 serve = "static"
 publicDir = "artifacts/itw-arc/dist/public"
 

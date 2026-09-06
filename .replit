@@ -1,19 +1,17 @@
 modules = ["nodejs-24"]
-
 [deployment]
 router = "application"
 deploymentTarget = "autoscale"
 
 [deployment.postBuild]
-args = ["pnpm", "store", "prune"]
+args = ["npm", "prune"]
 env = { "CI" = "true" }
 
 [workflows]
 runButton = "Project"
 
 [agent]
-stack = "PNPM_WORKSPACE"
-expertMode = true
+stack = "NPM_WORKSPACE"
 
 [postMerge]
 path = "scripts/post-merge.sh"
