@@ -15,6 +15,8 @@ const navigation: LinkItem[] = [
   { label: 'What ARC solves', href: '#practice' },
   { label: 'How we work', href: '#method' },
   { label: 'Why ARC', href: '#confidence' },
+  { label: 'Case studies', href: '#case-studies' },
+  { label: 'Insights', href: '#insights' },
   { label: 'Start a conversation', href: '#contact' },
 ];
 
@@ -91,12 +93,10 @@ function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; 
   return <div className={`reveal ${delay ? `reveal-delay-${delay}` : ''} ${className}`}>{children}</div>;
 }
 
-function SectionHead({ label, children }: { label: string; children: ReactNode }) {
+function SectionHead({ index, children }: { index?: string; children: ReactNode }) {
   return (
-    <div className="arc-section-head">
-      <span className="arc-section-label" data-testid={`text-section-${label.toLowerCase().replaceAll(' ', '-')}`}>
-        {label}
-      </span>
+    <div className={`arc-section-head ${index ? 'has-index' : ''}`}>
+      {index ? <span className="arc-section-index" data-testid={`text-section-index-${index}`}>{index}</span> : null}
       <h2 className="arc-section-title">{children}</h2>
     </div>
   );
@@ -156,7 +156,6 @@ function AppHome() {
 
       <section className="arc-hero" aria-labelledby="hero-title">
         <Reveal>
-          <span className="arc-kicker">ITW ARC / ADVISORY, REGULATORY &amp; COMPLIANCE</span>
           <h1 className="arc-hero-title" id="hero-title">
             Structure for the <em>stakes</em> behind the spectacle.
           </h1>
@@ -185,7 +184,6 @@ function AppHome() {
         <div className="arc-band-visual" aria-hidden="true" />
         <div className="arc-band-content">
           <Reveal>
-            <span className="arc-kicker arc-kicker-inverted">Where ambition meets scrutiny</span>
             <p className="arc-band-title" data-testid="text-band-statement">
               Build the operating logic before the next big moment.
             </p>
@@ -199,7 +197,7 @@ function AppHome() {
 
       <section className="arc-section" id="practice" aria-labelledby="practice-title">
         <Reveal>
-          <SectionHead label="01 / The mandate">
+          <SectionHead index="01">
             When the opportunity is moving fast, <span className="accent">clarity</span> cannot wait.
           </SectionHead>
           <p className="arc-intro-copy" id="practice-title" data-testid="text-practice-intro">
@@ -222,7 +220,6 @@ function AppHome() {
         <div className="arc-split">
           <Reveal>
             <div className="arc-section-head">
-              <span className="arc-section-label">02 / The approach</span>
               <h2 className="arc-section-title" id="method-title">One table. The <span className="accent">full picture.</span></h2>
             </div>
           </Reveal>
@@ -244,7 +241,6 @@ function AppHome() {
       <section className="arc-decision" id="confidence" aria-labelledby="confidence-title">
         <Reveal>
           <div className="arc-section-head">
-            <span className="arc-section-label">03 / The working model</span>
             <h2 className="arc-section-title" id="confidence-title">A better answer starts with the <span className="accent">right question.</span></h2>
           </div>
         </Reveal>
@@ -260,7 +256,7 @@ function AppHome() {
 
       <section className="arc-section arc-proof" aria-labelledby="proof-title">
         <Reveal>
-          <SectionHead label="04 / The confidence">
+          <SectionHead>
             Expertise that respects both the <span className="accent">detail</span> and the moment.
           </SectionHead>
         </Reveal>
@@ -274,11 +270,90 @@ function AppHome() {
         </Reveal>
       </section>
 
+      <section className="arc-section arc-case-studies" id="case-studies" aria-labelledby="case-studies-title">
+        <Reveal>
+          <SectionHead index="02">
+            Proof in the moments where <span className="accent">structure changes the outcome.</span>
+          </SectionHead>
+        </Reveal>
+        <div className="arc-case-grid" id="case-studies-title">
+          <Reveal>
+            <article className="arc-case-card" data-testid="card-case-league">
+              <div className="arc-case-top"><span>01</span><span>League / Structure</span></div>
+              <div>
+                <h3>Building a competition that could scale</h3>
+                <p>A new league needed the ownership, participation and governance model to match its ambition before the first season began.</p>
+              </div>
+              <a className="arc-text-link" href="#contact">Discuss a similar brief <ArrowUpRight size={16} strokeWidth={1.3} /></a>
+            </article>
+          </Reveal>
+          <Reveal delay={1}>
+            <article className="arc-case-card arc-case-card-dark" data-testid="card-case-rights">
+              <div className="arc-case-top"><span>02</span><span>Media / Rights</span></div>
+              <div>
+                <h3>Making a rights ecosystem legible</h3>
+                <p>Multiple partners, territories and commercial priorities became a rights architecture people could negotiate, explain and operate.</p>
+              </div>
+              <a className="arc-text-link" href="#contact">Discuss a similar brief <ArrowUpRight size={16} strokeWidth={1.3} /></a>
+            </article>
+          </Reveal>
+          <Reveal delay={2}>
+            <article className="arc-case-card arc-case-card-green" data-testid="card-case-governance">
+              <div className="arc-case-top"><span>03</span><span>Governance / Trust</span></div>
+              <div>
+                <h3>Turning scrutiny into confidence</h3>
+                <p>Clear decision rights and dispute readiness gave a high-stakes partnership the confidence to move without losing control.</p>
+              </div>
+              <a className="arc-text-link" href="#contact">Discuss a similar brief <ArrowUpRight size={16} strokeWidth={1.3} /></a>
+            </article>
+          </Reveal>
+        </div>
+        <Reveal>
+          <SectionCta href="#contact">Explore a case with ARC</SectionCta>
+        </Reveal>
+      </section>
+
+      <section className="arc-section arc-insights" id="insights" aria-labelledby="insights-title">
+        <Reveal>
+          <div className="arc-section-head">
+            <h2 className="arc-section-title" id="insights-title">The thinking behind the <span className="accent">next move.</span></h2>
+          </div>
+        </Reveal>
+        <div className="arc-insight-list">
+          <Reveal>
+            <article className="arc-insight-item" data-testid="card-insight-operating-model">
+              <div className="arc-insight-meta"><span>ARC / INSIGHT</span><span>01</span></div>
+              <h3>Why the operating model comes before the rights deal</h3>
+              <p>The questions to ask before the headline opportunity makes the underlying structure harder to change.</p>
+              <a className="arc-text-link" href="#contact">Read the point of view <ArrowUpRight size={16} strokeWidth={1.3} /></a>
+            </article>
+          </Reveal>
+          <Reveal delay={1}>
+            <article className="arc-insight-item" data-testid="card-insight-allocation">
+              <div className="arc-insight-meta"><span>ARC / INSIGHT</span><span>02</span></div>
+              <h3>The hidden cost of unclear rights allocation</h3>
+              <p>Where ambiguity travels through commercial conversations, partner relationships and the decisions that follow.</p>
+              <a className="arc-text-link" href="#contact">Read the point of view <ArrowUpRight size={16} strokeWidth={1.3} /></a>
+            </article>
+          </Reveal>
+          <Reveal delay={2}>
+            <article className="arc-insight-item" data-testid="card-insight-governance">
+              <div className="arc-insight-meta"><span>ARC / INSIGHT</span><span>03</span></div>
+              <h3>Governance that keeps ambition moving</h3>
+              <p>Good governance is not a brake. It is the shared language that lets responsible people make faster decisions.</p>
+              <a className="arc-text-link" href="#contact">Read the point of view <ArrowUpRight size={16} strokeWidth={1.3} /></a>
+            </article>
+          </Reveal>
+        </div>
+        <Reveal>
+          <SectionCta href="#contact">Start an insight conversation</SectionCta>
+        </Reveal>
+      </section>
+
       <section className="arc-contact" id="contact" aria-labelledby="contact-title">
         <Reveal>
           <div className="arc-contact-inner">
             <div>
-              <span className="arc-kicker">05 / The first conversation</span>
               <h2 id="contact-title">Bring us the <em>hard part.</em></h2>
             </div>
             <div className="arc-contact-action">
@@ -301,6 +376,8 @@ function AppHome() {
           <a href="#practice" data-testid="link-footer-practice">What ARC solves</a>
           <a href="#method" data-testid="link-footer-method">How we work</a>
           <a href="#confidence" data-testid="link-footer-confidence">Why ARC</a>
+          <a href="#case-studies" data-testid="link-footer-case-studies">Case studies</a>
+          <a href="#insights" data-testid="link-footer-insights">Insights</a>
         </div>
         <div className="arc-footer-col">
           <span className="arc-footer-label">For the people responsible</span>
