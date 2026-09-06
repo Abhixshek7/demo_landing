@@ -118,6 +118,15 @@ function PracticeCard({ index, title, copy, accent }: { index: string; title: st
   );
 }
 
+function SectionCta({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a className="arc-section-cta" href={href}>
+      {children}
+      <ArrowRight size={17} strokeWidth={1.4} />
+    </a>
+  );
+}
+
 function AppHome() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -159,10 +168,15 @@ function AppHome() {
             </p>
           </Reveal>
           <Reveal delay={2}>
-            <a className="arc-scroll-hint" href="#practice" data-testid="link-scroll-practice">
-              <ArrowDown size={15} strokeWidth={1.4} />
-              See what we solve
-            </a>
+            <div className="arc-hero-actions">
+              <a className="arc-cta" href="#contact" data-testid="link-hero-contact">
+                Start a conversation <ArrowRight size={17} strokeWidth={1.4} />
+              </a>
+              <a className="arc-scroll-hint" href="#practice" data-testid="link-scroll-practice">
+                <ArrowDown size={15} strokeWidth={1.4} />
+                See what we solve
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -171,10 +185,11 @@ function AppHome() {
         <div className="arc-band-visual" aria-hidden="true" />
         <div className="arc-band-content">
           <Reveal>
-            <span className="arc-kicker" style={{ color: '#d8d9d0' }}>Where ambition meets scrutiny</span>
+            <span className="arc-kicker arc-kicker-inverted">Where ambition meets scrutiny</span>
             <p className="arc-band-title" data-testid="text-band-statement">
               Build the operating logic before the next big moment.
             </p>
+            <SectionCta href="#method">See how ARC works</SectionCta>
           </Reveal>
           <Reveal delay={1}>
             <p className="arc-band-meta">A visual study in shared rights, considered risk and the lines that hold a system together.</p>
@@ -198,6 +213,9 @@ function AppHome() {
           <Reveal delay={2}><PracticeCard index="03" accent="AGREE" title="Media deals & contracts" copy="Turn complex media, sponsorship and partner terms into agreements built to perform." /></Reveal>
           <Reveal delay={3}><PracticeCard index="04" accent="PROTECT" title="Compliance & governance" copy="Design governance that protects trust, supports accountability and keeps decisions moving." /></Reveal>
         </div>
+        <Reveal>
+          <SectionCta href="#contact">View more services</SectionCta>
+        </Reveal>
       </section>
 
       <section className="arc-section" id="method" aria-labelledby="method-title">
@@ -217,6 +235,7 @@ function AppHome() {
                 <div className="arc-rule-item"><span>02</span><span>Keep commercial and legal logic connected</span><Check size={15} strokeWidth={1.4} /></div>
                 <div className="arc-rule-item"><span>03</span><span>Make confidence part of the deliverable</span><Check size={15} strokeWidth={1.4} /></div>
               </div>
+              <SectionCta href="#confidence">Explore the working model</SectionCta>
             </div>
           </Reveal>
         </div>
@@ -234,6 +253,9 @@ function AppHome() {
           <Reveal delay={1}><article className="arc-step"><span className="arc-step-number">02 / TEST</span><div><h3>Where could it break?</h3><p>We examine structure, rights, contracts, compliance and governance as one connected system.</p></div></article></Reveal>
           <Reveal delay={2}><article className="arc-step"><span className="arc-step-number">03 / MOVE</span><div><h3>What can everyone stand behind?</h3><p>We make the practical route forward clear enough to approve, explain and execute.</p></div></article></Reveal>
         </div>
+        <Reveal>
+          <SectionCta href="#contact">Talk through your situation</SectionCta>
+        </Reveal>
       </section>
 
       <section className="arc-section arc-proof" aria-labelledby="proof-title">
@@ -247,6 +269,9 @@ function AppHome() {
           <Reveal delay={1}><article className="arc-proof-item" data-testid="card-proof-media"><span className="arc-proof-mark">M /</span><h3>Fluent in media reality</h3><p>Rights allocation, broadcast relationships and commercial terms considered together.</p></article></Reveal>
           <Reveal delay={2}><article className="arc-proof-item" data-testid="card-proof-governance"><span className="arc-proof-mark">A /</span><h3>Accountable by design</h3><p>Governance, compliance and dispute readiness that strengthens partner confidence.</p></article></Reveal>
         </div>
+        <Reveal>
+          <SectionCta href="#contact">Start with the right question</SectionCta>
+        </Reveal>
       </section>
 
       <section className="arc-contact" id="contact" aria-labelledby="contact-title">
