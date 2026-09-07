@@ -1,0 +1,1 @@
+- [Public npm lockfiles](public-npm-lockfiles.md) — Replit installs can leave internal tarball URLs in package-lock.json even after project registry config is removed.
