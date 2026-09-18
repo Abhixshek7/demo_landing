@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Folder } from '@/components/ui/folder';
 
@@ -138,6 +138,13 @@ export function ServicesFolder({
                     <span className="paper-index">/{active.id}</span>
                     <span className="paper-title">{active.title}</span>
                     <span className="paper-description">{active.description}</span>
+                    <a
+                      className="arc-text-link paper-know-more"
+                      href={`/services/${active.id}`}
+                      data-testid={`link-service-know-more-${active.id}`}
+                    >
+                      Know more <ArrowUpRight size={15} strokeWidth={1.4} />
+                    </a>
                   </motion.div>
                 </AnimatePresence>
               </Folder>

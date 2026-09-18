@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X, Linkedin, Instagram, Youtube, Twitter } from 'lucide-react';
+import { SERVICES } from '@/data/services';
 
-export type LinkItem = { label: string; href: string };
+export type LinkItem = { label: string; href: string; children?: LinkItem[] };
 
 export function useScrollReveal() {
   useEffect(() => {
@@ -60,7 +61,11 @@ export function useBodyScrollLock(locked: boolean) {
 }
 
 export const navigation: LinkItem[] = [
-  { label: 'Services', href: '/services' },
+  {
+    label: 'Services',
+    href: '/#practice',
+    children: SERVICES.map((service) => ({ label: service.navLabel, href: `/services/${service.id}` })),
+  },
   { label: 'About Us', href: '/about-us' },
   { label: 'Case studies', href: '/case-studies' },
   { label: 'Insights', href: '/#insights' },
@@ -82,6 +87,12 @@ export function LogoLockup({ inverted = false }: { inverted?: boolean }) {
 }
 
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) setExpanded(null);
+  }, [open]);
+
   return (
     <div className={`arc-menu-overlay ${open ? 'is-open' : ''}`} id="arc-navigation" aria-hidden={!open}>
       <div className="arc-menu-top">
@@ -91,16 +102,52 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         </button>
       </div>
       <nav className="arc-menu-links" aria-label="Main navigation">
-        {navigation.map((item, index) => (
-          <a
-            key={item.href}
-            href={item.href}
-            onClick={onClose}
-            data-testid={`link-menu-${index}`}
-          >
-            {item.label}
-          </a>
-        ))}
+        {navigation.map((item, index) => {
+          if (!item.children?.length) {
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={onClose}
+                data-testid={`link-menu-${index}`}
+              >
+                {item.label}
+              </a>
+            );
+          }
+
+          const isExpanded = expanded === item.label;
+          return (
+            <div key={item.label} className="arc-menu-item">
+              <button
+                type="button"
+                className={`arc-menu-dropdown-toggle ${isExpanded ? 'is-open' : ''}`}
+                onClick={() => setExpanded(isExpanded ? null : item.label)}
+                aria-expanded={isExpanded}
+                aria-controls={`arc-menu-dropdown-${index}`}
+                data-testid={`button-menu-dropdown-${index}`}
+              >
+                {item.label}
+                <ChevronDown size={22} strokeWidth={1.5} className="arc-menu-dropdown-chevron" />
+              </button>
+              <div
+                className={`arc-menu-dropdown-list ${isExpanded ? 'is-open' : ''}`}
+                id={`arc-menu-dropdown-${index}`}
+              >
+                {item.children.map((child, childIndex) => (
+                  <a
+                    key={child.href}
+                    href={child.href}
+                    onClick={onClose}
+                    data-testid={`link-menu-dropdown-${index}-${childIndex}`}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </nav>
       <div className="arc-menu-footer">
         <span>FOR SPORTS · MEDIA · ENTERTAINMENT</span>
@@ -158,25 +205,42 @@ export function SectionCta({ href, children }: { href: string; children: ReactNo
 }
 
 export function Footer() {
+  const servicesNav = navigation.find((item) => item.label === 'Services');
+  const pageLinks = navigation.filter((item) => item.label !== 'Services');
+
   return (
     <footer className="arc-footer">
-      <div className="arc-footer-col">
+      <div className="arc-footer-brand">
         <img src="/logo-arc.png" alt="ITW ARC" className="arc-logo-img arc-logo-img-inverted arc-footer-logo" />
         <span>The legal advisory &amp; compliance<br />for sports, media and entertainment.</span>
       </div>
-      <div className="arc-footer-col">
-        <span className="arc-footer-label">Explore</span>
-        <a href="/#practice" data-testid="link-footer-practice">What ARC solves</a>
-        <a href="/#method" data-testid="link-footer-method">How we work</a>
-        <a href="/about-us" data-testid="link-footer-about">About Us</a>
-        <a href="/case-studies" data-testid="link-footer-case-studies">Case studies</a>
-        <a href="/#insights" data-testid="link-footer-insights">Insights</a>
-        <a href="/our-team" data-testid="link-footer-team">Our team</a>
+      <div className="arc-footer-grid">
+        <div className="arc-footer-col">
+          <span className="arc-footer-label">Services</span>
+          {servicesNav?.children?.map((service, index) => (
+            <a key={service.href} href={service.href} data-testid={`link-footer-service-${index}`}>
+              {service.label}
+            </a>
+          ))}
+        </div>
+        <div className="arc-footer-col">
+          <span className="arc-footer-label">Pages</span>
+          {pageLinks.map((item, index) => (
+            <a key={item.href} href={item.href} data-testid={`link-footer-page-${index}`}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <div className="arc-footer-col">
+          <span className="arc-footer-label">Connect</span>
+          <div className="arc-footer-social">
+            <a href="#" aria-label="LinkedIn" data-testid="link-footer-linkedin"><Linkedin size={18} strokeWidth={1.6} /></a>
+            <a href="#" aria-label="Instagram" data-testid="link-footer-instagram"><Instagram size={18} strokeWidth={1.6} /></a>
+            <a href="#" aria-label="YouTube" data-testid="link-footer-youtube"><Youtube size={18} strokeWidth={1.6} /></a>
+            <a href="#" aria-label="X (Twitter)" data-testid="link-footer-twitter"><Twitter size={18} strokeWidth={1.6} /></a>
+          </div>
+        </div>
       </div>
-      {/* <div className="arc-footer-col">
-        <span className="arc-footer-label">For the people responsible</span>
-        <span>League organizers · rights holders<br />Franchises · sponsors · broadcasters<br />In-house counsel · procurement</span>
-      </div> */}
       <div className="arc-footer-bottom">
         <span>© 2025 ITW ARC / ITW UNIVERSE</span>
         {/* <a href="/#top" data-testid="link-footer-top">Back to top ↑</a> */}

@@ -21,6 +21,7 @@ import TeamPage from '@/pages/team';
 import ContactPage from '@/pages/contact';
 import AboutUsPage from '@/pages/about-us';
 import CaseStudiesPage from '@/pages/case-studies';
+import ServiceDetailPage from '@/pages/service-detail';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -369,6 +370,7 @@ function Router() {
         <Route path="/contact" component={ContactPage} />
         <Route path="/about-us" component={AboutUsPage} />
         <Route path="/case-studies" component={CaseStudiesPage} />
+        <Route path="/services/:id" component={ServiceDetailPage} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
