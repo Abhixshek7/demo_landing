@@ -108,10 +108,19 @@ export default function TeamPage() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      <section className="arc-contact" aria-labelledby="team-contact-title">
         <Reveal>
-          <div className="arc-vt-cta">
-            <SectionCta href="/contact">Discuss your requirements</SectionCta>
+          <div className="arc-contact-head">
+            <h2 id="team-contact-title">Want to work with the team?</h2>
+            <p className="arc-contact-subtitle">
+              Tell us what's on your mind and the right person on the team will get back to you.
+            </p>
           </div>
+        </Reveal>
+        <Reveal delay={1}>
+          <SectionCta href="/contact">Start a conversation</SectionCta>
         </Reveal>
       </section>
 

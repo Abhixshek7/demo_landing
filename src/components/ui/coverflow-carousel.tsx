@@ -26,6 +26,8 @@ export interface CoverflowCarouselProps {
   falloff?: number;
   /** Opacity lost per step from the centre. */
   fade?: number;
+  /** How much larger the centred card renders, e.g. 1.3 = 30% bigger. */
+  centerScale?: number;
   /** Any CSS length. Everything else is derived from it, so the rake scales. */
   cardWidth?: string;
   /** Space between cards, as a fraction of card width. */
@@ -51,6 +53,7 @@ export function CoverflowCarousel({
   perspective = 3,
   falloff = 0.56,
   fade = 0.1,
+  centerScale = 1.3,
   cardWidth = 'clamp(148px, 22vw, 260px)',
   gap = 0.05,
   loop = true,
@@ -118,10 +121,13 @@ export function CoverflowCarousel({
       const ramp = Math.pow(distance, falloff);
       // Capped short of edge-on so a far card never turns its back.
       const tilt = Math.min(rotate * ramp, 82) * Math.sign(offset);
+      // Only the true centre gets the boost — immediate neighbours are
+      // already back to their natural size, so the focus reads as one card.
+      const scale = 1 + (centerScale - 1) * Math.max(0, 1 - distance);
 
       card.style.transform =
-        `translateX(calc(-50% + ${offset * pitch}px)) ` +
-        `translateZ(${-depth * width * ramp}px) rotateY(${-tilt}deg)`;
+        `translate(calc(-50% + ${offset * pitch}px), -50%) ` +
+        `translateZ(${-depth * width * ramp}px) rotateY(${-tilt}deg) scale(${scale})`;
 
       // A card is teleported across the ring at exactly half a turn out, so it
       // has to be gone by then or the jump is visible.
@@ -129,7 +135,7 @@ export function CoverflowCarousel({
       card.style.opacity = String(Math.max(0, 1 - fade * distance) * edge);
       card.style.zIndex = String(100 - Math.round(distance));
     });
-  }, [count, depth, fade, falloff, gap, loop, rotate]);
+  }, [centerScale, count, depth, fade, falloff, gap, loop, rotate]);
 
   const settle = React.useCallback(
     (target: number) => {
@@ -312,7 +318,9 @@ export function CoverflowCarousel({
           <div
             className="relative select-none"
             style={{
-              height: 'var(--cf-card)',
+              // Tall enough that the scaled-up centre card never clips
+              // against the frame's overflow, whatever card it lands on.
+              height: `calc(var(--cf-card) * ${centerScale})`,
               transformStyle: 'preserve-3d',
             }}
           >
@@ -327,7 +335,7 @@ export function CoverflowCarousel({
                 aria-label={`${index + 1} of ${count}`}
                 data-card-index={index}
                 className={cn(
-                  'absolute left-1/2 top-0 aspect-square cursor-pointer overflow-hidden rounded-2xl bg-muted shadow-xl will-change-transform',
+                  'absolute left-1/2 top-1/2 aspect-square cursor-pointer overflow-hidden rounded-2xl bg-muted shadow-xl will-change-transform',
                   cardClassName,
                 )}
                 style={{ width: 'var(--cf-card)' }}

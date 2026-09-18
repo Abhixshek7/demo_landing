@@ -1,3 +1,5 @@
+import { Linkedin } from 'lucide-react';
+
 export interface TeamMember {
   name: string;
   speciality: string;
@@ -11,11 +13,11 @@ export interface TeamAccordionProps {
 
 export function TeamAccordion({ members }: TeamAccordionProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-6">
+    <div className="flex flex-col gap-6 md:flex-row">
       {members.map((member) => (
         <article
           key={member.photo}
-          className="group relative flex-1 aspect-[3/4] rounded-xl overflow-hidden bg-muted/30 border border-border/40"
+          className="group relative flex-1 aspect-[3/4] rounded-xl overflow-hidden bg-muted/30"
         >
           <a
             href="/contact"
@@ -42,9 +44,15 @@ export function TeamAccordion({ members }: TeamAccordionProps) {
 
             {/* Hover / focus: full-card blur with a brief summary */}
             <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-5 bg-black/55 backdrop-blur-md opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
-              <h3 className="text-white text-lg md:text-xl font-medium tracking-tight">
-                {member.name}
-              </h3>
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-white text-lg md:text-xl font-medium tracking-tight">
+                  {member.name}
+                </h3>
+                {/* Placeholder for a future LinkedIn profile link — visual hover state only for now. */}
+                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-colors duration-200 group-hover:bg-white/25">
+                  <Linkedin size={13} strokeWidth={1.8} />
+                </span>
+              </div>
               <p className="text-white/75 text-[11px] md:text-xs uppercase tracking-[0.14em] mt-1 mb-3">
                 {member.speciality}
               </p>

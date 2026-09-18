@@ -107,6 +107,74 @@ button { cursor: pointer; }
 .arc-section { padding: 112px 32px; }
 .arc-services { padding: 96px 0 96px; }
 .arc-vt-cta { padding-top: 48px; }
+
+/* Services folder — open by default, a small stack of papers with the active
+   service pulled out on top; hovering a service in the list swaps it. The
+   active paper animates from the folder's landscape proportions up into its
+   own portrait shape as it's pulled out (scaleY 0 → 1, bottom-anchored). */
+.services-folder-wrap { display: flex; justify-content: center; padding: 24px 32px 0; }
+
+.folder { position: relative; }
+.folder__back {
+  position: relative;
+  width: 420px;
+  height: 270px;
+  background: var(--folder-back-color);
+  border-radius: 0 28px 28px 28px;
+}
+.folder__back::after {
+  position: absolute;
+  z-index: 0;
+  bottom: 98%;
+  left: 0;
+  content: '';
+  width: 132px;
+  height: 30px;
+  background: var(--folder-back-color);
+  border-radius: 14px 14px 0 0;
+}
+.folder__front {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--folder-color);
+  border-radius: 12px 28px 28px 28px;
+  transform-origin: bottom;
+  transform: skew(15deg) scaleY(.6);
+}
+.folder__front.right { transform: skew(-15deg) scaleY(.6); }
+
+.paper-stack-deco {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 10%;
+  width: 230px;
+  height: 280px;
+  border-radius: 18px;
+  background: var(--color-bone);
+  box-shadow: 0 10px 22px rgba(10, 10, 9, .14);
+}
+.paper-stack-deco-1 { margin-left: -126px; transform: translate(-16px, -8%) rotateZ(-7deg); opacity: .5; }
+.paper-stack-deco-2 { margin-left: -115px; transform: translate(12px, -14%) rotateZ(5deg); opacity: .75; }
+
+.paper-active-slot {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 10%;
+  width: 320px;
+  height: 420px;
+  margin-left: -160px;
+  padding: 38px 34px;
+  background: var(--color-bone);
+  border-radius: 22px;
+  border: 2px solid var(--color-teal);
+  box-shadow: 0 18px 36px rgba(10, 10, 9, .22);
+}
+.paper-index { display: block; font: 12px var(--app-font-mono); color: var(--color-teal); }
+.paper-title { display: block; margin-top: 16px; font-size: 25px; font-weight: 500; letter-spacing: -.03em; line-height: 1.2; color: var(--color-ink); }
+.paper-description { display: block; margin-top: 18px; font-size: 16px; line-height: 1.6; color: var(--color-graphite); }
 .arc-section-head { display: grid; grid-template-columns: 25% 1fr; gap: 32px;  padding-top: 14px; }
 .arc-section-head:not(.has-index) { display: block; }
 .arc-section-index { color: var(--color-teal); font: 12px var(--app-font-mono); letter-spacing: .04em; }
@@ -180,22 +248,15 @@ button { cursor: pointer; }
 .about-universe { text-align: center; }
 .about-universe .arc-section-cta { margin-top: 32px; }
 
-.case-studies-carousel { padding-top: 0; text-align: center; }
-.case-study-card { max-width: 620px; margin: 24px auto 0; }
+.case-studies-carousel { padding-top: 0; padding-bottom: 56px; text-align: center; }
+.case-study-card { max-width: 680px; margin: 40px auto 0; }
 .case-study-tag { display: inline-flex; font: 11px var(--app-font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--color-teal); }
 .case-study-card h3 { margin: 14px 0 0; font-size: clamp(26px, 3vw, 34px); font-weight: 500; letter-spacing: -.03em; line-height: 1.15; }
 .case-study-date { display: block; margin-top: 10px; font: 12px var(--app-font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--color-graphite); }
 .case-study-card p { margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: var(--color-graphite); }
+.case-study-services { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 22px; }
+.case-study-pill { display: inline-flex; align-items: center; padding: 7px 16px; border-radius: 999px; border: 1px solid var(--color-ash); font-size: 13px; letter-spacing: -.01em; color: var(--color-graphite); }
 
-.case-modal-overlay { position: fixed; inset: 0; z-index: 50; background: rgba(10, 10, 9, .72); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px; }
-.case-modal { position: relative; max-width: 620px; width: 100%; max-height: 86vh; overflow-y: auto; background: var(--color-bone); border-radius: 24px; padding: 44px; text-align: left; }
-.case-modal-close { position: absolute; top: 18px; right: 18px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--color-ink); color: var(--color-bone); border: 0; cursor: pointer; transition: background-color .2s ease; }
-.case-modal-close:hover { background: var(--color-teal); }
-.case-modal h3 { margin: 14px 0 0; font-size: clamp(24px, 2.6vw, 30px); font-weight: 500; letter-spacing: -.03em; line-height: 1.15; }
-.case-modal p { margin: 16px 0 0; font-size: 17px; line-height: 1.6; color: var(--color-ink); }
-.case-modal-services { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.case-modal-services li { position: relative; padding-left: 16px; font-size: 15px; color: var(--color-graphite); }
-.case-modal-services li::before { content: '—'; position: absolute; left: 0; opacity: .6; }
 .arc-decision .arc-section-cta:hover { background: var(--color-ink); color: var(--color-bone); }
 
 .arc-proof { padding-bottom: 72px; background: var(--color-ink); color: var(--color-bone); }
@@ -353,6 +414,18 @@ button { cursor: pointer; }
   .arc-section { padding: 76px 18px; }
   .arc-services { padding: 56px 0 56px; }
   .arc-vt-cta { padding-top: 32px; }
+  .services-folder-wrap { padding: 420px 18px 24px; }
+  .folder__back { width: 260px; height: 165px; border-radius: 0 20px 20px 20px; }
+  .folder__back::after { width: 82px; height: 20px; border-radius: 10px 10px 0 0; }
+  .folder__front { border-radius: 8px 20px 20px 20px; }
+  .paper-stack-deco { width: 155px; height: 185px; border-radius: 14px; }
+  .paper-stack-deco-1 { margin-left: -85px; }
+  .paper-stack-deco-2 { margin-left: -78px; }
+  .paper-active-slot { width: 240px; height: 340px; margin-left: -120px; padding: 26px 24px; border-radius: 18px; }
+  .paper-index { font-size: 11px; }
+  .paper-title { margin-top: 12px; font-size: 19px; }
+  .paper-description { margin-top: 12px; font-size: 13px; line-height: 1.55; }
+  .services-folder-hint { margin: 16px auto 32px; max-width: 240px; text-align: center; font-size: 13px; line-height: 1.4; color: var(--color-graphite); }
   .arc-section-head.has-index { grid-template-columns: 1fr; gap: 18px; }
   .arc-section-title { font-size: clamp(42px, 12vw, 64px); }
   .arc-intro-copy { margin: 43px 0 0; font-size: 20px; }
@@ -375,7 +448,6 @@ button { cursor: pointer; }
   .about-top-title { font-size: clamp(42px, 12vw, 72px); line-height: .96; }
   .about-top-support { justify-self: start; max-width: none; text-align: left; }
   .about-top-image { margin-top: 32px; height: 60vh; }
-  .case-modal { padding: 28px; border-radius: 18px; }
   .arc-step { min-height: 235px; }
   .arc-proof { padding-bottom: 48px; }
   .arc-case-grid { grid-template-columns: 1fr; margin-top: 60px; }

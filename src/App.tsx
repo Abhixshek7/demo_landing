@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Header, Footer, Reveal, SectionHead, SectionCta, useScrollReveal, useBodyScrollLock } from '@/components/layout';
-import { VerticalTabs } from '@/components/ui/vertical-tabs';
+import { ServicesFolder } from '@/components/ui/services-folder';
 import {
   ProgressSlider,
   SliderContent,
@@ -254,7 +254,7 @@ function AppHome() {
       <section className="arc-section arc-method" id="method" aria-labelledby="method-title">
         <Reveal>
           <div className="arc-section-head">
-            <h2 className="arc-section-title" id="method-title">Our way of< span className="accent"> plan and execution.</span></h2>
+            <h2 className="arc-section-title" id="method-title">Our way of< span className="accent"> planing and execution.</span></h2>
           </div>
         </Reveal>
         <HorizontalStack steps={workSteps} />
@@ -264,7 +264,7 @@ function AppHome() {
       </section>
 
       <section className="arc-section arc-services" id="practice" aria-label="Services">
-        <VerticalTabs />
+        <ServicesFolder />
         <Reveal>
           <div className="arc-vt-cta w-full px-4 md:px-8 lg:px-12 xl:px-20 mx-auto">
             <SectionCta href="/contact">Discuss your requirements</SectionCta>
