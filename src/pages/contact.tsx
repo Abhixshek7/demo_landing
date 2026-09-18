@@ -35,7 +35,7 @@ export default function ContactPage() {
                 </li>
                 <li>
                   <MapPin size={17} strokeWidth={1.5} />
-                  <span>123 Tech Avenue, San Francisco, USA</span>
+                  <span>123 Tech Avenue, Bangalore, India</span>
                 </li>
                 <li>
                   <Phone size={17} strokeWidth={1.5} />

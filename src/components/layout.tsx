@@ -60,10 +60,9 @@ export function useBodyScrollLock(locked: boolean) {
 }
 
 export const navigation: LinkItem[] = [
-  { label: 'What ARC solves', href: '/#practice' },
-  { label: 'How we work', href: '/#method' },
-  { label: 'Why ARC', href: '/#confidence' },
-  { label: 'Case studies', href: '/#case-studies' },
+  { label: 'Services', href: '/services' },
+  { label: 'About Us', href: '/about-us' },
+  { label: 'Case studies', href: '/case-studies' },
   { label: 'Insights', href: '/#insights' },
   { label: 'Our team', href: '/our-team' },
   { label: 'Start a conversation', href: '/contact' },
@@ -169,8 +168,8 @@ export function Footer() {
         <span className="arc-footer-label">Explore</span>
         <a href="/#practice" data-testid="link-footer-practice">What ARC solves</a>
         <a href="/#method" data-testid="link-footer-method">How we work</a>
-        <a href="/#confidence" data-testid="link-footer-confidence">Why ARC</a>
-        <a href="/#case-studies" data-testid="link-footer-case-studies">Case studies</a>
+        <a href="/about-us" data-testid="link-footer-about">About Us</a>
+        <a href="/case-studies" data-testid="link-footer-case-studies">Case studies</a>
         <a href="/#insights" data-testid="link-footer-insights">Insights</a>
         <a href="/our-team" data-testid="link-footer-team">Our team</a>
       </div>
