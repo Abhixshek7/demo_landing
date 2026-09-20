@@ -273,12 +273,38 @@ button { cursor: pointer; }
 
 .service-body { padding-top: 0; }
 
-.service-bento-card { position: relative; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-radius: 20px; padding: 28px; background: var(--color-ink); }
-.service-bento-title { margin: 0; max-width: 420px; font-size: 22px; line-height: 1.15; letter-spacing: -.03em; font-weight: 500; color: var(--color-bone); }
-.service-bento-desc { margin: 16px 0 0; max-width: 440px; font-size: 16px; line-height: 1.55; color: var(--color-ash); }
-.service-bento-foot { margin-top: 24px; display: flex; align-items: center; justify-content: flex-end; }
-.service-bento-arrow { flex-shrink: 0; width: 46px; height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: var(--color-teal); color: var(--color-bone); transition: background-color .25s ease, color .25s ease, transform .25s ease; }
-.service-bento-card:hover .service-bento-arrow { background: var(--color-bone); color: var(--color-ink); transform: translateY(-3px) rotate(8deg); }
+/* Service "what we do" board — styled after a stadium scoreboard: a metal-frame
+   grid of dark segments, each with a bold uppercase label under a divider rule
+   (like HOME / GUESTS panels) and a dot-matrix textured readout underneath. */
+.service-board { margin-top: 60px; border-radius: 20px; padding: 3px; background: var(--color-ash); box-shadow: 0 24px 48px rgba(10, 10, 9, .22); }
+.service-board-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; border-radius: 17px; overflow: hidden; }
+.service-board-cell { position: relative; min-height: 270px; display: flex; flex-direction: column; background: var(--color-ink); padding: 30px 28px 26px; }
+.service-board-cell-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.service-board-index { font: 11px var(--app-font-mono); letter-spacing: .12em; color: var(--color-graphite); }
+.service-board-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-teal); box-shadow: 0 0 8px var(--color-teal); }
+.service-board-label { margin: 0 0 16px; padding-bottom: 16px; border-bottom: 2px solid rgba(255, 254, 247, .14); font-size: clamp(18px, 2.1vw, 23px); font-weight: 600; letter-spacing: .01em; text-transform: uppercase; color: var(--color-bone); }
+.service-board-readout { position: relative; flex: 1; border-radius: 8px; }
+.service-board-readout::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 8px;
+  background-image: radial-gradient(circle, rgba(255, 254, 247, .07) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+}
+.service-board-readout p { position: relative; margin: 0; max-width: 420px; font-size: 15px; line-height: 1.65; color: var(--color-ash); }
+
+/* Team board — same scoreboard framing as the services board, laid out as a
+   3-4-3 grid of member "segments" on desktop, stacking to one column on
+   mobile. Each row keeps its own column count but shares one metal frame. */
+.team-board { display: flex; flex-direction: column; gap: 3px; border-radius: 20px; padding: 3px; background: var(--color-ash); overflow: hidden; box-shadow: 0 24px 48px rgba(10, 10, 9, .22); }
+.team-board-row { display: grid; grid-template-columns: 1fr; gap: 3px; }
+.team-board-row[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+.team-board-row[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+.team-board-cell { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--color-ink); }
+.team-board-cell-top { position: absolute; top: 16px; left: 16px; right: 16px; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
+.team-board-index { font: 11px var(--app-font-mono); letter-spacing: .1em; color: rgba(255, 254, 247, .78); text-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
+.team-board-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-teal); box-shadow: 0 0 8px var(--color-teal); }
 
 .service-who { padding-top: 0; }
 .service-who-panel { max-width: 900px; margin: 0 auto; border: 1px solid var(--color-ash); border-radius: 24px; padding: 40px; text-align: center; }
@@ -517,11 +543,14 @@ button { cursor: pointer; }
   .service-top-side { justify-self: start; align-items: flex-start; padding-top: 0; }
   .service-top-support { max-width: none; text-align: left; }
   .service-top-panel { margin-top: 32px; height: 34vh; min-height: 220px; }
-  .service-bento-card { min-height: 240px; padding: 22px; }
-  .service-bento-title { font-size: 19px; }
-  .service-bento-arrow { width: 40px; height: 40px; }
+  .service-board { margin-top: 40px; }
+  .service-board-grid { grid-template-columns: 1fr; }
+  .service-board-cell { min-height: 220px; padding: 24px 22px; }
   .service-who-panel { padding: 28px 22px; }
   .service-who-panel p { font-size: 17px; }
+  .team-board { border-radius: 14px; }
+  .team-board-row[data-cols="3"], .team-board-row[data-cols="4"] { grid-template-columns: 1fr; }
+  .team-board-cell-top { top: 12px; left: 12px; right: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

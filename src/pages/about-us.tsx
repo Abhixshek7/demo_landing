@@ -86,7 +86,7 @@ export default function AboutUsPage() {
           ))}
         </div>
         <Reveal>
-          <SectionCta href="/contact">View our services</SectionCta>
+          <SectionCta href="/">View our services</SectionCta>
         </Reveal>
       </section>
 

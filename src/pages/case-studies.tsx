@@ -127,7 +127,7 @@ export default function CaseStudiesPage() {
         </Reveal>
         <Reveal delay={1}>
           <div className="case-study-card" key={active.index}>
-            <span className="case-study-tag">{active.tag}</span>
+            {/* <span className="case-study-tag">{active.tag}</span> */}
             <h3>{active.name}</h3>
             <span className="case-study-date">{active.date}</span>
             <p>{active.description}</p>
@@ -145,10 +145,10 @@ export default function CaseStudiesPage() {
       <section className="arc-contact" aria-labelledby="case-contact-title">
         <Reveal>
           <div className="arc-contact-head">
-            <h2 id="case-contact-title">Have a similarly complex situation?</h2>
-            <p className="arc-contact-subtitle">
+            <h2 id="case-contact-title">Discuss your business</h2>
+            {/* <p className="arc-contact-subtitle">
               Tell us what's on your mind and the right person on the team will get back to you.
-            </p>
+            </p> */}
           </div>
         </Reveal>
         <Reveal delay={1}>

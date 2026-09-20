@@ -9,16 +9,14 @@ export interface TeamMember {
 
 export interface TeamAccordionProps {
   members: TeamMember[];
+  startIndex?: number;
 }
 
-export function TeamAccordion({ members }: TeamAccordionProps) {
+export function TeamAccordion({ members, startIndex = 0 }: TeamAccordionProps) {
   return (
-    <div className="flex flex-col gap-6 md:flex-row">
-      {members.map((member) => (
-        <article
-          key={member.photo}
-          className="group relative flex-1 aspect-[3/4] rounded-xl overflow-hidden bg-muted/30"
-        >
+    <div className="team-board-row" data-cols={members.length}>
+      {members.map((member, i) => (
+        <article key={member.photo} className="group relative team-board-cell">
           <a
             href="/contact"
             className="absolute inset-0 z-10 focus:outline-none"
@@ -30,6 +28,12 @@ export function TeamAccordion({ members }: TeamAccordionProps) {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-focus-visible:scale-105"
               loading="lazy"
             />
+
+            {/* Scoreboard framing — index tag + LED dot, always on */}
+            <div className="team-board-cell-top">
+              <span className="team-board-index">/{String(startIndex + i + 1).padStart(2, '0')}</span>
+              <span className="team-board-dot" aria-hidden="true" />
+            </div>
 
             {/* Base gradient + always-visible name / speciality */}
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/85 via-black/35 to-transparent transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0" />
@@ -53,7 +57,7 @@ export function TeamAccordion({ members }: TeamAccordionProps) {
                   <Linkedin size={13} strokeWidth={1.8} />
                 </span>
               </div>
-              <p className="text-white/75 text-[11px] md:text-xs uppercase tracking-[0.14em] mt-1 mb-3">
+              <p className="text-white/75 text-[11px] md:text-xs uppercase tracking-[0.14em] mt-1 mb-3 pb-3 border-b border-white/15">
                 {member.speciality}
               </p>
               <p className="text-white/90 text-sm leading-relaxed">

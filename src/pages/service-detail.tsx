@@ -8,7 +8,7 @@ import {
   useScrollReveal,
   useBodyScrollLock,
 } from '@/components/layout';
-import { ConditionGrid } from '@/components/ui/condition-grid';
+import { ServiceScoreboard } from '@/components/ui/service-scoreboard';
 import { getServiceById } from '@/data/services';
 import NotFound from '@/pages/not-found';
 
@@ -71,12 +71,11 @@ export default function ServiceDetailPage() {
             </h2>
           </div>
         </Reveal>
-        <ConditionGrid
-          className="mt-15"
+        <ServiceScoreboard
           items={service.whatWeDo.map((item, index) => ({
             id: String(index + 1).padStart(2, '0'),
             title: item.title,
-            des: item.description,
+            description: item.description,
           }))}
         />
       </section>
@@ -97,7 +96,7 @@ export default function ServiceDetailPage() {
           <div className="arc-contact-head">
             <h2 id="service-contact-title">{service.ctaLabel}.</h2>
             <p className="arc-contact-subtitle">
-              Tell us what's on your mind and the right person on the team will get back to you.
+              {/* Tell us what's on your mind and the right person on the team will get back to you. */}
             </p>
           </div>
         </Reveal>

@@ -348,7 +348,7 @@ function AppHome() {
         <Reveal>
           <div className="arc-contact-head">
             <h2 id="contact-title">Bring us the complex part.</h2>
-            <p className="arc-contact-subtitle">Have a project, partnership or compliance question? Tell us what's on your mind and the right person on the team will get back to you.</p>
+            <p className="arc-contact-subtitle"></p>
           </div>
         </Reveal>
         <Reveal delay={1}>

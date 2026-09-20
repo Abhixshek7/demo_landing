@@ -101,10 +101,10 @@ export default function TeamPage() {
       </section>
 
       <section className="arc-section" style={{ paddingTop: 0 }} aria-label="Team members">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        <div className="team-board">
           {TEAM_ROWS.map((row, index) => (
             <Reveal key={row.map((member) => member.name).join('-')} delay={Math.min(index, 2)}>
-              <TeamAccordion members={row} />
+              <TeamAccordion members={row} startIndex={TEAM_ROWS.slice(0, index).reduce((sum, r) => sum + r.length, 0)} />
             </Reveal>
           ))}
         </div>
@@ -113,10 +113,10 @@ export default function TeamPage() {
       <section className="arc-contact" aria-labelledby="team-contact-title">
         <Reveal>
           <div className="arc-contact-head">
-            <h2 id="team-contact-title">Want to work with the team?</h2>
-            <p className="arc-contact-subtitle">
+            <h2 id="team-contact-title">Work with our team.</h2>
+            {/* <p className="arc-contact-subtitle">
               Tell us what's on your mind and the right person on the team will get back to you.
-            </p>
+            </p> */}
           </div>
         </Reveal>
         <Reveal delay={1}>
