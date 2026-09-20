@@ -117,74 +117,6 @@ button { cursor: pointer; }
 .arc-services { padding: 96px 0 96px; }
 .arc-vt-cta { padding-top: 48px; }
 
-/* Services folder — open by default, a small stack of papers with the active
-   service pulled out on top; hovering a service in the list swaps it. The
-   active paper animates from the folder's landscape proportions up into its
-   own portrait shape as it's pulled out (scaleY 0 → 1, bottom-anchored). */
-.services-folder-wrap { display: flex; justify-content: center; padding: 24px 32px 0; }
-
-.folder { position: relative; }
-.folder__back {
-  position: relative;
-  width: 420px;
-  height: 270px;
-  background: var(--folder-back-color);
-  border-radius: 0 28px 28px 28px;
-}
-.folder__back::after {
-  position: absolute;
-  z-index: 0;
-  bottom: 98%;
-  left: 0;
-  content: '';
-  width: 132px;
-  height: 30px;
-  background: var(--folder-back-color);
-  border-radius: 14px 14px 0 0;
-}
-.folder__front {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  background: var(--folder-color);
-  border-radius: 12px 28px 28px 28px;
-  transform-origin: bottom;
-  transform: skew(15deg) scaleY(.6);
-}
-.folder__front.right { transform: skew(-15deg) scaleY(.6); }
-
-.paper-stack-deco {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  bottom: 10%;
-  width: 230px;
-  height: 280px;
-  border-radius: 18px;
-  background: var(--color-bone);
-  box-shadow: 0 10px 22px rgba(10, 10, 9, .14);
-}
-.paper-stack-deco-1 { margin-left: -126px; transform: translate(-16px, -8%) rotateZ(-7deg); opacity: .5; }
-.paper-stack-deco-2 { margin-left: -115px; transform: translate(12px, -14%) rotateZ(5deg); opacity: .75; }
-
-.paper-active-slot {
-  position: absolute;
-  z-index: 4;
-  left: 50%;
-  bottom: 10%;
-  width: 320px;
-  height: 420px;
-  margin-left: -160px;
-  padding: 38px 34px;
-  background: var(--color-bone);
-  border-radius: 22px;
-  border: 2px solid var(--color-teal);
-  box-shadow: 0 18px 36px rgba(10, 10, 9, .22);
-}
-.paper-index { display: block; font: 12px var(--app-font-mono); color: var(--color-teal); }
-.paper-title { display: block; margin-top: 16px; font-size: 25px; font-weight: 500; letter-spacing: -.03em; line-height: 1.2; color: var(--color-ink); }
-.paper-description { display: block; margin-top: 18px; font-size: 16px; line-height: 1.6; color: var(--color-graphite); }
-.paper-know-more { margin-top: 22px; color: var(--color-ink); }
 .arc-section-head { display: grid; grid-template-columns: 25% 1fr; gap: 32px;  padding-top: 14px; }
 .arc-section-head:not(.has-index) { display: block; }
 .arc-section-index { color: var(--color-teal); font: 12px var(--app-font-mono); letter-spacing: .04em; }
@@ -482,19 +414,6 @@ button { cursor: pointer; }
   .arc-section { padding: 76px 18px; }
   .arc-services { padding: 56px 0 56px; }
   .arc-vt-cta { padding-top: 32px; }
-  .services-folder-wrap { padding: 420px 18px 24px; }
-  .folder__back { width: 260px; height: 165px; border-radius: 0 20px 20px 20px; }
-  .folder__back::after { width: 82px; height: 20px; border-radius: 10px 10px 0 0; }
-  .folder__front { border-radius: 8px 20px 20px 20px; }
-  .paper-stack-deco { width: 155px; height: 185px; border-radius: 14px; }
-  .paper-stack-deco-1 { margin-left: -85px; }
-  .paper-stack-deco-2 { margin-left: -78px; }
-  .paper-active-slot { width: 240px; height: 340px; margin-left: -120px; padding: 26px 24px; border-radius: 18px; }
-  .paper-index { font-size: 11px; }
-  .paper-title { margin-top: 12px; font-size: 19px; }
-  .paper-description { margin-top: 12px; font-size: 13px; line-height: 1.55; }
-  .paper-know-more { margin-top: 14px; font-size: 13px; padding-bottom: 3px; }
-  .services-folder-hint { margin: 16px auto 32px; max-width: 240px; text-align: center; font-size: 13px; line-height: 1.4; color: var(--color-graphite); }
   .arc-section-head.has-index { grid-template-columns: 1fr; gap: 18px; }
   .arc-section-title { font-size: clamp(42px, 12vw, 64px); }
   .arc-intro-copy { margin: 43px 0 0; font-size: 20px; }
