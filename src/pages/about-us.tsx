@@ -17,12 +17,12 @@ const PILLARS = [
   {
     title: 'Where could it break?',
     description:
-      'We examine structure, rights, contracts, compliance and governance as one connected system.',
+      'We examine structure, rights, contracts, compliance and governance.',
   },
   {
     title: 'What can everyone stand behind?',
     description:
-      'We make the practical route forward clear enough to approve, explain and execute.',
+      'We make the practical route forward to execute.',
   },
 ];
 

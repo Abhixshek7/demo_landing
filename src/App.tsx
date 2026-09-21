@@ -196,7 +196,7 @@ function AppHome() {
       <section className="arc-section arc-proof" aria-labelledby="proof-title">
         <Reveal>
           <SectionHead>
-            Our expertise lies in <span className="accent">sports,media and entertainment business.</span> 
+            The legal team for<span className="accent"> sports,media and entertainment business.</span> 
           </SectionHead>
         </Reveal>
         <div id="proof-title" className="proof-carousel">

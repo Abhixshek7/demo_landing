@@ -18,6 +18,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('arc-theme');
+          if (theme === 'variant') document.documentElement.setAttribute('data-theme', 'variant');
+        } catch (e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

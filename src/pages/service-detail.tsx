@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'wouter';
+import { ArrowUpRight } from 'lucide-react';
 import {
   Header,
   Footer,
@@ -10,6 +11,7 @@ import {
 } from '@/components/layout';
 import { ServiceScoreboard } from '@/components/ui/service-scoreboard';
 import { getServiceById } from '@/data/services';
+import { getProofForService } from '@/data/case-studies';
 import NotFound from '@/pages/not-found';
 
 export default function ServiceDetailPage() {
@@ -24,6 +26,8 @@ export default function ServiceDetailPage() {
   if (!service) {
     return <NotFound />;
   }
+
+  const proof = getProofForService(service.id);
 
   return (
     <main className="arc-page" id="top">
@@ -79,6 +83,34 @@ export default function ServiceDetailPage() {
           }))}
         />
       </section>
+
+      {proof ? (
+        <section className="arc-section service-proof" aria-label="Proof">
+          <Reveal>
+            <div className="arc-section-head">
+              <h2 className="arc-section-title">
+                Related Case study<span className="accent">.</span>
+              </h2>
+            </div>
+          </Reveal>
+          <Reveal delay={1}>
+            <a href="/case-studies" className="proof-card" data-testid="link-service-proof">
+              <div className="proof-card-image">
+                <img src={proof.image} alt={proof.name} loading="lazy" />
+              </div>
+              <div className="proof-card-body">
+                <span className="proof-card-tag">{proof.tag}</span>
+                <h3>{proof.name}</h3>
+                <span className="proof-card-date">{proof.date}</span>
+                <p>{proof.description}</p>
+                <span className="proof-card-link">
+                  View case study <ArrowUpRight size={16} strokeWidth={1.4} />
+                </span>
+              </div>
+            </a>
+          </Reveal>
+        </section>
+      ) : null}
 
       {service.whoThisIsFor ? (
         <section className="arc-section service-who" aria-label="Who this is for">
