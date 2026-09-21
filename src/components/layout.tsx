@@ -4,6 +4,54 @@ import { SERVICES } from '@/data/services';
 
 export type LinkItem = { label: string; href: string; children?: LinkItem[] };
 
+export type ThemeName = 'base' | 'variant';
+const THEME_STORAGE_KEY = 'arc-theme';
+
+function readStoredTheme(): ThemeName {
+  try {
+    return window.localStorage.getItem(THEME_STORAGE_KEY) === 'variant' ? 'variant' : 'base';
+  } catch {
+    return 'base';
+  }
+}
+
+export function useTheme() {
+  const [theme, setTheme] = useState<ThemeName>(readStoredTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      // ignore — private browsing / storage disabled
+    }
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((prev) => (prev === 'base' ? 'variant' : 'base'));
+
+  return { theme, setTheme, toggleTheme };
+}
+
+export function ThemeToggle({ className = '' }: { className?: string }) {
+  const { theme, toggleTheme } = useTheme();
+  const isVariant = theme === 'variant';
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className={`arc-theme-toggle ${className}`}
+      aria-pressed={isVariant}
+      aria-label={`Switch to the ${isVariant ? 'base' : 'variant'} color scheme`}
+      data-testid="button-theme-toggle"
+    >
+      <span className="arc-theme-toggle-thumb" aria-hidden="true" />
+      <span className={`arc-theme-toggle-option ${!isVariant ? 'is-active' : ''}`}>Base</span>
+      <span className={`arc-theme-toggle-option ${isVariant ? 'is-active' : ''}`}>Variant</span>
+    </button>
+  );
+}
+
 export function useScrollReveal() {
   useEffect(() => {
     const nodes = document.querySelectorAll('.reveal');
@@ -166,16 +214,19 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
         <a href="/#top" aria-label="Back to top" data-testid="link-home">
           <LogoLockup />
         </a>
-        <button
-          className="arc-menu-button"
-          aria-expanded={menuOpen}
-          aria-controls="arc-navigation"
-          onClick={() => setMenuOpen(!menuOpen)}
-          data-testid="button-open-menu"
-        >
-          {menuOpen ? 'Close' : 'Menu'}
-          {menuOpen ? <X size={15} strokeWidth={1.7} /> : <Menu size={15} strokeWidth={1.7} />}
-        </button>
+        <div className="arc-header-actions">
+          <ThemeToggle className="arc-header-theme-toggle" />
+          <button
+            className="arc-menu-button"
+            aria-expanded={menuOpen}
+            aria-controls="arc-navigation"
+            onClick={() => setMenuOpen(!menuOpen)}
+            data-testid="button-open-menu"
+          >
+            {menuOpen ? 'Close' : 'Menu'}
+            {menuOpen ? <X size={15} strokeWidth={1.7} /> : <Menu size={15} strokeWidth={1.7} />}
+          </button>
+        </div>
       </header>
       <MenuOverlay open={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
