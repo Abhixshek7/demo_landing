@@ -1,23 +1,5 @@
 import type { ReactNode } from 'react';
 
-const darkenColor = (hex: string, percent: number) => {
-  let color = hex.startsWith('#') ? hex.slice(1) : hex;
-  if (color.length === 3) {
-    color = color
-      .split('')
-      .map((c) => c + c)
-      .join('');
-  }
-  const num = parseInt(color.slice(0, 6), 16);
-  let r = (num >> 16) & 0xff;
-  let g = (num >> 8) & 0xff;
-  let b = num & 0xff;
-  r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
-  g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
-  b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
-  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
-};
-
 export interface FolderProps {
   color?: string;
   size?: number;
@@ -27,10 +9,12 @@ export interface FolderProps {
 }
 
 /** A permanently-open decorative folder shell — the paper stack is composed by the caller. */
-export function Folder({ color = '#5227FF', size = 1, className = '', children }: FolderProps) {
+export function Folder({ color = 'var(--color-teal)', size = 1, className = '', children }: FolderProps) {
+  // color-mix (rather than a JS hex-darken) so the back panel stays correct
+  // when `color` is a CSS variable that changes with the theme toggle.
   const folderStyle = {
     ['--folder-color' as string]: color,
-    ['--folder-back-color' as string]: darkenColor(color, 0.08),
+    ['--folder-back-color' as string]: `color-mix(in srgb, ${color} 92%, #000)`,
   };
 
   return (

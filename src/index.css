@@ -90,6 +90,7 @@
   --color-ash: #d8cfbc;
   --color-teal: #565449;
   --color-green-soft: #d8cfbc;
+  --app-font-sans: 'Spectral', ui-serif, Georgia, serif;
 }
 
 * { box-sizing: border-box; }

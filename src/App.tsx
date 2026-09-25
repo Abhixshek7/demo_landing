@@ -12,7 +12,6 @@ import {
   SliderBtn,
 } from '@/components/ui/progressive-carousel';
 import { StackingCards, type StackingCardData } from '@/components/ui/stacking-card';
-import { HorizontalStack, type HorizontalStackStep } from '@/components/ui/horizontal-stack';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -49,37 +48,6 @@ const proofItems = [
     description:
       "Compliance frameworks, governance systems and dispute-readiness protocols — designed so that growth doesn't outpace the legal foundation.",
     image: '/about/legal.jpg',
-  },
-];
-
-const workSteps: HorizontalStackStep[] = [
-  {
-    index: '01',
-    title: 'Discover',
-    description:
-      "We start by understanding the business.",
-    image: '/howWeWork/discover.jpg',
-  },
-  {
-    index: '02',
-    title: 'Diagnose',
-    description:
-      'We map the legal, regulatory and commercial risk.',
-    image: '/howWeWork/diagnose.jpg',
-  },
-  {
-    index: '03',
-    title: 'Design',
-    description:
-      "We structure the agreements, governance and rights architecture.",
-    image: '/howWeWork/design.jpg',
-  },
-  {
-    index: '04',
-    title: 'Deliver',
-    description:
-      "We help you deliver your successful business.",
-    image: '/howWeWork/deliver.jpg',
   },
 ];
 
@@ -174,7 +142,7 @@ function AppHome() {
           <div className="arc-hero-side">
             <Reveal delay={1}>
               <p className="arc-hero-note" data-testid="text-hero-intro">
-                The Advisory that make sports, media and entertainment businesses work: clear structures, durable agreements and confidence between partners.
+                The Legal Advisory for sports, media and entertainment businesses .
               </p>
             </Reveal>
             <Reveal delay={2}>
@@ -196,7 +164,7 @@ function AppHome() {
       <section className="arc-section arc-proof" aria-labelledby="proof-title">
         <Reveal>
           <SectionHead>
-            The legal team for<span className="accent"> sports,media and entertainment business.</span> 
+           Handling the advisory, regulatory and compliance for<span className="accent"> your business.</span> 
           </SectionHead>
         </Reveal>
         <div id="proof-title" className="proof-carousel">
@@ -251,18 +219,6 @@ function AppHome() {
           <SectionCta href="/contact">Talk through your situation</SectionCta>
         </Reveal>
       </section> */}
-
-      <section className="arc-section arc-method" id="method" aria-labelledby="method-title">
-        <Reveal>
-          <div className="arc-section-head">
-            <h2 className="arc-section-title" id="method-title">Our way of< span className="accent"> planing and execution.</span></h2>
-          </div>
-        </Reveal>
-        <HorizontalStack steps={workSteps} />
-        {/* <Reveal>
-          <SectionCta href="#confidence">Discuss your requirements</SectionCta>
-        </Reveal> */}
-      </section>
 
       <section className="arc-section arc-services" id="practice" aria-label="Services">
         <ServicesFolder />

@@ -122,7 +122,7 @@ export function ServicesFolder({
           {/* Right column: open folder with the active service pulled out as a paper */}
           <div className="lg:col-span-7 order-2">
             <div className="services-folder-wrap">
-              <Folder color="#075f4e" className="services-folder-shell">
+              <Folder className="services-folder-shell">
                 <div className="paper-stack-deco paper-stack-deco-1" />
                 <div className="paper-stack-deco paper-stack-deco-2" />
                 <AnimatePresence mode="wait">
